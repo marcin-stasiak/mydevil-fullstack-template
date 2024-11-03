@@ -50,7 +50,7 @@ let TypeOrmModule;
     ArticlesModule,
     CategoriesModule,
     SettingsModule,
-    TagsModule,
+    TagsModule
     // Integrations
   ],
   controllers: [],
