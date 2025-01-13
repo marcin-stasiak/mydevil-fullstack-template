@@ -8,5 +8,5 @@ import { CreateCategoryInput } from './create-category.input';
 export class UpdateCategoryInput extends PartialType(CreateCategoryInput) {
   @IsUUID()
   @Field(() => String)
-  id: string;
+  public id: string;
 }

@@ -21,7 +21,7 @@ export class SettingsService {
     return this.settingRepository.findOne({ where: { path: path } });
   }
 
-  public update(updateSettingInput: UpdateSettingInput) {
+  public update(updateSettingInput: UpdateSettingInput): Promise<Setting> {
     const setting = this.settingRepository.preload({ path: updateSettingInput.path });
 
     if (setting) {

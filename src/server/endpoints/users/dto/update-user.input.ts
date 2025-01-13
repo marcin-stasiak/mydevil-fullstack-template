@@ -8,5 +8,5 @@ import { CreateUserInput } from './create-user.input';
 export class UpdateUserInput extends PartialType(CreateUserInput) {
   @IsUUID()
   @Field(() => String)
-  id: string;
+  public id: string;
 }

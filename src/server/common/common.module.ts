@@ -56,7 +56,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}
 
-  configure(consumer: MiddlewareConsumer) {
+  public configure(consumer: MiddlewareConsumer) {
     if (this.config.get('development')) {
       consumer.apply(ClientMiddleware).exclude('graphql').forRoutes({ path: '*', method: RequestMethod.GET });
     } else {

@@ -14,15 +14,18 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-member-accessibility': [
+      'warn',
+      {
+        overrides: {
+          constructors: 'no-public',
+        },
+      },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    // '@typescript-eslint/typedef': [
-    //   'warn',
-    //   {
-    //     'variableDeclaration': true
-    //   }
-    // ]
+    '@typescript-eslint/typedef': 'warn',
   },
 };

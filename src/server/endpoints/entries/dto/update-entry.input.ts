@@ -8,5 +8,5 @@ import { CreateEntryInput } from './create-entry.input';
 export class UpdateEntryInput extends PartialType(CreateEntryInput) {
   @IsUUID()
   @Field(() => String)
-  id: string;
+  public id: string;
 }

@@ -1,6 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entity';
 import { Gender } from '../../../common/enums/gender.enum';
@@ -22,6 +22,6 @@ export class User extends BaseEndpointEntity {
   public gender: Gender;
 
   @Field(() => [Entry])
-  @ManyToOne(() => Entry, (entry) => entry.author)
+  @OneToMany(() => Entry, (entry) => entry.author)
   public entries: Entry[];
 }

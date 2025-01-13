@@ -8,5 +8,5 @@ import { CreateTagInput } from './create-tag.input';
 export class UpdateTagInput extends PartialType(CreateTagInput) {
   @IsUUID()
   @Field(() => String)
-  id: string;
+  public id: string;
 }
