@@ -2,7 +2,7 @@
 
 ## Description
 
-Fullstack template for NestJS & React web applications.
+Fullstack template for [NestJS](https://nestjs.com/), [PostgreSQL](https://postgresql.org/) & [React](https://react.dev/) web applications. Some specific solutions are dedicated to [Phusion Passenger](https://www.phusionpassenger.com/) on [MyDevil](https://www.mydevil.net/) hosting. 
 
 ## Project setup
 
