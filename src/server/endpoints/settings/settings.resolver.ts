@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
 import { CreateSettingInput } from './dto/create-setting.input';
 import { UpdateSettingInput } from './dto/update-setting.input';
@@ -10,27 +10,27 @@ export class SettingsResolver {
   constructor(private readonly settingsService: SettingsService) {}
 
   @Mutation(() => Setting)
-  createSetting(@Args('createSettingInput') createSettingInput: CreateSettingInput) {
+  public createSetting(@Args('createSettingInput') createSettingInput: CreateSettingInput) {
     return this.settingsService.create(createSettingInput);
   }
 
   @Query(() => [Setting], { name: 'settings' })
-  findAll() {
+  public findAll() {
     return this.settingsService.findAll();
   }
 
   @Query(() => Setting, { name: 'setting' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  public findOne(@Args('id', { type: () => String }) id: string) {
     return this.settingsService.findOne(id);
   }
 
   @Mutation(() => Setting)
-  updateSetting(@Args('updateSettingInput') updateSettingInput: UpdateSettingInput) {
-    return this.settingsService.update(updateSettingInput.id, updateSettingInput);
+  public updateSetting(@Args('updateSettingInput') updateSettingInput: UpdateSettingInput) {
+    return this.settingsService.update(updateSettingInput);
   }
 
   @Mutation(() => Setting)
-  removeSetting(@Args('id', { type: () => Int }) id: number) {
+  public removeSetting(@Args('id', { type: () => String }) id: string) {
     return this.settingsService.remove(id);
   }
 }

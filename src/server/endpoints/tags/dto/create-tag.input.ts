@@ -1,7 +1,9 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+
+import { BaseEndpointInput } from '../../../common/inputs/base-endpoint.input';
 
 @InputType()
-export class CreateTagInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+export class CreateTagInput extends BaseEndpointInput {
+  @Field()
+  public name: string;
 }

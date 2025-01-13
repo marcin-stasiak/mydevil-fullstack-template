@@ -1,11 +1,13 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 
-import { BaseEntity, Entity, PrimaryColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entity';
 
 @ObjectType()
 @Entity('settings')
-export class Setting extends BaseEntity {
+export class Setting extends BaseEndpointEntity {
   @Field(() => String)
-  @PrimaryColumn()
-  public path: string;
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
 }

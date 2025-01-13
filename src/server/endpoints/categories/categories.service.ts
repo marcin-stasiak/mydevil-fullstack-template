@@ -5,23 +5,23 @@ import { UpdateCategoryInput } from './dto/update-category.input';
 
 @Injectable()
 export class CategoriesService {
-  create(createCategoryInput: CreateCategoryInput) {
+  public create(createCategoryInput: CreateCategoryInput) {
     return 'This action adds a new category';
   }
 
-  findAll() {
+  public findAll() {
     return `This action returns all categories`;
   }
 
-  findOne(id: number) {
+  public findOne(id: string) {
     return `This action returns a #${id} category`;
   }
 
-  update(id: number, updateCategoryInput: UpdateCategoryInput) {
-    return `This action updates a #${id} category`;
+  public update(updateCategoryInput: UpdateCategoryInput) {
+    return `This action updates a #${updateCategoryInput} category`;
   }
 
-  remove(id: number) {
+  public remove(id: string) {
     return `This action removes a #${id} category`;
   }
 }

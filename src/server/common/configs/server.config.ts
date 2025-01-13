@@ -4,5 +4,5 @@ import * as process from 'node:process';
 
 export default () => ({
   development: process.env.NODE_ENV !== 'production',
-  port: Number.parseInt(process.env.PORT, 10) || 6464,
+  port: Number.parseInt(process.env.PORT, 10) || 3000,
 });

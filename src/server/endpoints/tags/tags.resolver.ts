@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
@@ -10,27 +10,32 @@ export class TagsResolver {
   constructor(private readonly tagsService: TagsService) {}
 
   @Mutation(() => Tag)
-  createTag(@Args('createTagInput') createTagInput: CreateTagInput) {
+  public createTag(@Args('createTagInput') createTagInput: CreateTagInput) {
     return this.tagsService.create(createTagInput);
   }
 
   @Query(() => [Tag], { name: 'tags' })
-  findAll() {
+  public findAll() {
     return this.tagsService.findAll();
   }
 
   @Query(() => Tag, { name: 'tag' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.tagsService.findOne(id);
+  public findOne(@Args('slug', { type: () => String }) slug: string) {
+    return this.tagsService.findOneBySlug(slug);
   }
 
   @Mutation(() => Tag)
-  updateTag(@Args('updateTagInput') updateTagInput: UpdateTagInput) {
-    return this.tagsService.update(updateTagInput.id, updateTagInput);
+  public updateTag(@Args('updateTagInput') updateTagInput: UpdateTagInput) {
+    return this.tagsService.update(updateTagInput);
   }
 
   @Mutation(() => Tag)
-  removeTag(@Args('id', { type: () => Int }) id: number) {
+  public removeTag(@Args('id', { type: () => String }) id: string) {
     return this.tagsService.remove(id);
+  }
+
+  @Query(() => Number, { name: 'countTags' })
+  public count() {
+    return this.tagsService.count();
   }
 }

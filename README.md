@@ -2,7 +2,7 @@
 
 ## Description
 
-Fullstack template for Nest & React web applications
+Fullstack template for NestJS & React web applications.
 
 ## Project setup
 

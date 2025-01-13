@@ -1,29 +1,54 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository } from 'typeorm';
 
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
+import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class TagsService {
-  constructor() {}
+  constructor(
+    @InjectRepository(Tag)
+    private readonly tagRepository: Repository<Tag>,
+  ) {}
 
-  create(createTagInput: CreateTagInput) {
-    return 'This action adds a new tag';
+  public create(createTagInput: CreateTagInput): Promise<Tag> {
+    const tag = this.tagRepository.create(createTagInput);
+
+    return this.tagRepository.save(tag);
   }
 
-  findAll() {
-    return `This action returns all tags`;
+  public findAll(): Promise<Tag[]> {
+    return this.tagRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  public findOneById(id: string): Promise<Tag> {
+    return this.tagRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateTagInput: UpdateTagInput) {
-    return `This action updates a #${id} tag`;
+  public findOneBySlug(slug: string): Promise<Tag> {
+    return this.tagRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  public async update(updateTagInput: UpdateTagInput) {
+    const tag = await this.tagRepository.preload({ id: updateTagInput.id });
+
+    if (tag) {
+      return this.tagRepository.save(Object.assign(tag, updateTagInput));
+    }
+  }
+
+  public async remove(id: string) {
+    const tag = await this.tagRepository.preload({ id: id });
+
+    if (tag) {
+      return this.tagRepository.delete(tag.id);
+    }
+  }
+
+  public count(): Promise<number> {
+    return this.tagRepository.count();
   }
 }

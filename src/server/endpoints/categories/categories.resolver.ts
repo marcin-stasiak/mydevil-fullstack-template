@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
 import { CategoriesService } from './categories.service';
 import { CreateCategoryInput } from './dto/create-category.input';
@@ -20,17 +20,17 @@ export class CategoriesResolver {
   }
 
   @Query(() => Category, { name: 'category' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.categoriesService.findOne(id);
   }
 
   @Mutation(() => Category)
   updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
-    return this.categoriesService.update(updateCategoryInput.id, updateCategoryInput);
+    return this.categoriesService.update(updateCategoryInput);
   }
 
   @Mutation(() => Category)
-  removeCategory(@Args('id', { type: () => Int }) id: number) {
+  removeCategory(@Args('id', { type: () => String }) id: string) {
     return this.categoriesService.remove(id);
   }
 }
