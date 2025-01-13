@@ -20,8 +20,8 @@ export class EntriesResolver {
   }
 
   @Query(() => Entry, { name: 'entry' })
-  public findOne(@Args('id', { type: () => String }) id: string) {
-    return this.entriesService.findOne(id);
+  public findOne(@Args('slug', { type: () => String }) slug: string) {
+    return this.entriesService.findOneBySlug(slug);
   }
 
   @Mutation(() => Entry)
@@ -32,5 +32,10 @@ export class EntriesResolver {
   @Mutation(() => Entry)
   public removeEntry(@Args('id', { type: () => String }) id: string) {
     return this.entriesService.remove(id);
+  }
+
+  @Query(() => Number, { name: 'countEntries' })
+  public count() {
+    return this.entriesService.count();
   }
 }

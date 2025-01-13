@@ -1,12 +1,10 @@
-import { InputType, Field, PartialType } from '@nestjs/graphql';
-
-import { IsUUID } from 'class-validator';
-
-import { CreateSettingInput } from './create-setting.input';
+import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateSettingInput extends PartialType(CreateSettingInput) {
-  @IsUUID()
+export class UpdateSettingInput {
   @Field(() => String)
-  id: string;
+  public path: string;
+
+  @Field(() => String)
+  public value: string;
 }

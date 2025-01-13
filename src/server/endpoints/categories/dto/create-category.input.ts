@@ -5,5 +5,5 @@ import { BaseEndpointInput } from '../../../common/inputs/base-endpoint.input';
 @InputType()
 export class CreateCategoryInput extends BaseEndpointInput {
   @Field()
-  public name: string;
+  public title: string;
 }

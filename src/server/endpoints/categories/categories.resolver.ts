@@ -10,27 +10,32 @@ export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Mutation(() => Category)
-  createCategory(@Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
+  public createCategory(@Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
     return this.categoriesService.create(createCategoryInput);
   }
 
   @Query(() => [Category], { name: 'categories' })
-  findAll() {
+  public findAll() {
     return this.categoriesService.findAll();
   }
 
   @Query(() => Category, { name: 'category' })
-  findOne(@Args('id', { type: () => String }) id: string) {
-    return this.categoriesService.findOne(id);
+  public findOne(@Args('slug', { type: () => String }) slug: string) {
+    return this.categoriesService.findOneBySlug(slug);
   }
 
   @Mutation(() => Category)
-  updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
+  public updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
     return this.categoriesService.update(updateCategoryInput);
   }
 
   @Mutation(() => Category)
-  removeCategory(@Args('id', { type: () => String }) id: string) {
+  public removeCategory(@Args('id', { type: () => String }) id: string) {
     return this.categoriesService.remove(id);
+  }
+
+  @Query(() => Number, { name: 'countCategories' })
+  public count() {
+    return this.categoriesService.count();
   }
 }

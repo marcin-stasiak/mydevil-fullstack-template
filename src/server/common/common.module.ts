@@ -15,6 +15,7 @@ import { ClientMiddleware } from './middlewares/client.middleware';
 import { CompressionMiddleware } from './middlewares/compression.middleware';
 import { SecureMiddleware } from './middlewares/secure.middleware';
 import { RoutesService } from './routes.service';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Global()
 @Module({
@@ -50,7 +51,7 @@ import { RoutesService } from './routes.service';
     }),
     TypeOrmModule.forFeature([Meta]),
   ],
-  providers: [AuthService, RoutesService],
+  providers: [AuthService, RoutesService, LocalStrategy],
 })
 export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}

@@ -1,29 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
-import { CreateSettingInput } from './dto/create-setting.input';
+import { Repository } from 'typeorm';
+
 import { UpdateSettingInput } from './dto/update-setting.input';
+import { Setting } from './entities/setting.entity';
 
 @Injectable()
 export class SettingsService {
-  constructor() {}
+  constructor(
+    @InjectRepository(Setting)
+    private readonly settingRepository: Repository<Setting>,
+  ) {}
 
-  public create(createSettingInput: CreateSettingInput) {
-    return 'This action adds a new setting';
+  public findAll(): Promise<Setting[]> {
+    return this.settingRepository.find();
   }
 
-  public findAll() {
-    return `This action returns all settings`;
-  }
-
-  public findOne(id: string) {
-    return `This action returns a #${id} setting`;
+  public findOne(path: string): Promise<Setting> {
+    return this.settingRepository.findOne({ where: { path: path } });
   }
 
   public update(updateSettingInput: UpdateSettingInput) {
-    return `This action updates a #${updateSettingInput} setting`;
-  }
+    const setting = this.settingRepository.preload({ path: updateSettingInput.path });
 
-  public remove(id: string) {
-    return `This action removes a #${id} setting`;
+    if (setting) {
+      return this.settingRepository.save(Object.assign(setting, updateSettingInput));
+    }
   }
 }

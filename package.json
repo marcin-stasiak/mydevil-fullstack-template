@@ -1,7 +1,7 @@
 {
-  "name": "fullstack-template",
+  "name": "mydevil-fullstack-template",
   "version": "0.0.1-beta",
-  "description": "Fullstack template for NestJS & React web applications",
+  "description": "Fullstack template for NestJS, PostgreSQL & React web applications",
   "author": "Marcin Stasiak",
   "license": "MIT",
   "scripts": {

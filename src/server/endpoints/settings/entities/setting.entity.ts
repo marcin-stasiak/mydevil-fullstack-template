@@ -1,6 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entity';
 
@@ -8,6 +8,10 @@ import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entit
 @Entity('settings')
 export class Setting extends BaseEndpointEntity {
   @Field(() => String)
-  @PrimaryGeneratedColumn('uuid')
-  public id: string;
+  @PrimaryColumn({ type: 'varchar', length: 255 })
+  public path: string;
+
+  @Field(() => String)
+  @Column({ type: 'varchar', length: 255 })
+  public value: string;
 }
