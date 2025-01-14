@@ -52,6 +52,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     TypeOrmModule.forFeature([Meta]),
   ],
   providers: [AuthService, RoutesService, LocalStrategy],
+  exports: [AuthService, RoutesService],
 })
 export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}

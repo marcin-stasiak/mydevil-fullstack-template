@@ -34,12 +34,12 @@ export class Entry extends BaseEndpointEntity {
 
   @Field(() => [Category])
   @ManyToMany(() => Category, (category) => category.entries)
-  @JoinTable()
+  @JoinTable({ name: 'entries_categories' })
   public categories: Category[];
 
   @Field(() => [Tag])
   @ManyToMany(() => Tag, (tag) => tag.entries)
-  @JoinTable()
+  @JoinTable({ name: 'entries_tags' })
   public tags: Tag[];
 
   @Field(() => Date)
