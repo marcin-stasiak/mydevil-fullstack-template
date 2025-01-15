@@ -1,13 +1,13 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { AuthService } from '../../common/auth.service';
+import { AccountsService } from './accounts.service';
 import { AccountArgs } from './dto/account.args';
 import { LoginInput } from './dto/login.input';
 import { RegisterInput } from './dto/register.input';
 
 @Resolver()
 export class AccountsResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly accountsService: AccountsService) {}
 
   @Mutation(() => AccountArgs)
   public register(@Args('registerInput') registerInput: RegisterInput) {

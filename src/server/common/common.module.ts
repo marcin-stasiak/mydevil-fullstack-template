@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { join } from 'path';
 
-import { AuthService } from './auth.service';
 import appConfig from './configs/app.config';
 import databaseConfig from './configs/database.config';
 import serverConfig from './configs/server.config';
@@ -16,6 +15,7 @@ import { CompressionMiddleware } from './middlewares/compression.middleware';
 import { SecureMiddleware } from './middlewares/secure.middleware';
 import { RoutesService } from './routes.service';
 import { LocalStrategy } from './strategies/local.strategy';
+import { TokenStrategy } from './strategies/token.strategy';
 
 @Global()
 @Module({
@@ -51,8 +51,8 @@ import { LocalStrategy } from './strategies/local.strategy';
     }),
     TypeOrmModule.forFeature([Meta]),
   ],
-  providers: [AuthService, RoutesService, LocalStrategy],
-  exports: [AuthService, RoutesService],
+  providers: [RoutesService, LocalStrategy, TokenStrategy],
+  exports: [RoutesService],
 })
 export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}
