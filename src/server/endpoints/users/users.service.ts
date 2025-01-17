@@ -32,6 +32,13 @@ export class UsersService {
     return this.userRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
+  public findOneByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: { email: email },
+      select: ['email', 'password'],
+    });
+  }
+
   public async update(updateUserInput: UpdateUserInput): Promise<User> {
     const user = await this.userRepository.preload({ id: updateUserInput.id });
 

@@ -14,8 +14,6 @@ import { ClientMiddleware } from './middlewares/client.middleware';
 import { CompressionMiddleware } from './middlewares/compression.middleware';
 import { SecureMiddleware } from './middlewares/secure.middleware';
 import { RoutesService } from './routes.service';
-import { LocalStrategy } from './strategies/local.strategy';
-import { TokenStrategy } from './strategies/token.strategy';
 
 @Global()
 @Module({
@@ -51,7 +49,7 @@ import { TokenStrategy } from './strategies/token.strategy';
     }),
     TypeOrmModule.forFeature([Meta]),
   ],
-  providers: [RoutesService, LocalStrategy, TokenStrategy],
+  providers: [RoutesService],
   exports: [RoutesService],
 })
 export class CommonModule implements NestModule {
