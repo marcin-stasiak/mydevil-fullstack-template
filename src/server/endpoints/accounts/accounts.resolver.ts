@@ -1,4 +1,5 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Resolver } from '@nestjs/graphql';
+import { Args, Mutation } from '@nestjs/graphql';
 
 import { AccountsService } from './accounts.service';
 import { AccountArgs } from './dto/account.args';
@@ -11,11 +12,11 @@ export class AccountsResolver {
 
   @Mutation(() => AccountArgs)
   public register(@Args('registerInput') registerInput: RegisterInput) {
-    // return this.authService.register(registerInput);
+    console.log(registerInput);
   }
 
   @Mutation(() => AccountArgs)
   public login(@Args('loginInput') loginInput: LoginInput) {
-    // return this.authService.login(loginInput);
+    console.log(loginInput);
   }
 }
