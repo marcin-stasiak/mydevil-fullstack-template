@@ -18,7 +18,13 @@ export class TokenStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  public async validate(payload: any) {
-    const user = this.accountsService.validateToken(payload);
+  public validate(payload: any): Promise<Us> {
+    const user = this.accountsService.validateToken(payload.id);
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    return user;
   }
 }
