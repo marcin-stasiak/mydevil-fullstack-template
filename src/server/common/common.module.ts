@@ -31,6 +31,7 @@ import { RoutesService } from './routes.service';
       }),
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
