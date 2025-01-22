@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
@@ -18,12 +18,12 @@ export class TokenStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  public validate(payload: any): Promise<Us> {
-    const user = this.accountsService.validateToken(payload.id);
+  public async validate(payload: any): Promise<any> {
+    const user = await this.accountsService.validateToken(payload.id);
 
-    if (!user) {
-      throw new UnauthorizedException();
-    }
+    // if (!user) {
+    //   throw new UnauthorizedException();
+    // }
 
     return user;
   }
