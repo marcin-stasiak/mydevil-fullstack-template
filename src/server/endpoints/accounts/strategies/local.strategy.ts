@@ -9,11 +9,14 @@ import { AccountsService } from '../accounts.service';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly accountsService: AccountsService) {
-    super();
+    super({
+      usernameField: 'email',
+      passwordField: 'password',
+    });
   }
 
-  public validate(username: string, password: string): Promise<User> {
-    const user = this.accountsService.validateUser(username, password);
+  public validate(email: string, password: string): Promise<User> {
+    const user = this.accountsService.validateUser(email, password);
 
     if (!user) {
       throw new UnauthorizedException();

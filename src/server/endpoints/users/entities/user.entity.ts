@@ -24,4 +24,8 @@ export class User extends BaseEndpointEntity {
   @Field(() => [Entry])
   @OneToMany(() => Entry, (entry) => entry.author)
   public entries: Entry[];
+
+  @Field(() => String, { nullable: true })
+  @Column({ type: 'varchar', name: 'refresh_token', select: false, nullable: true })
+  public refreshToken: string;
 }

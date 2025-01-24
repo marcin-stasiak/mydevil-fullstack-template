@@ -1,6 +1,15 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entity';
 import { EntryStatus } from '../../../common/enums/entry-status.enum';
@@ -30,23 +39,32 @@ export class Entry extends BaseEndpointEntity {
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.entries)
+  @JoinColumn({ name: 'author_id' })
   public author: User;
 
   @Field(() => [Category])
   @ManyToMany(() => Category, (category) => category.entries)
-  @JoinTable({ name: 'entries_categories' })
+  @JoinTable({
+    name: 'entries_categories',
+    joinColumn: { name: 'entry_id' },
+    inverseJoinColumn: { name: 'category_id' },
+  })
   public categories: Category[];
 
   @Field(() => [Tag])
   @ManyToMany(() => Tag, (tag) => tag.entries)
-  @JoinTable({ name: 'entries_tags' })
+  @JoinTable({
+    name: 'entries_tags',
+    joinColumn: { name: 'entry_id' },
+    inverseJoinColumn: { name: 'tag_id' },
+  })
   public tags: Tag[];
 
   @Field(() => Date)
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date;
 
   @Field(() => Date)
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   public updatedAt: Date;
 }

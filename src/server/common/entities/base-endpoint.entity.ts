@@ -12,6 +12,6 @@ export abstract class BaseEndpointEntity extends BaseEntity {
 
   @Field(() => Meta)
   @OneToOne(() => Meta, { cascade: true })
-  @JoinColumn()
+  @JoinColumn({ name: 'meta_slug' })
   public meta: Meta;
 }

@@ -1,12 +1,10 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-
-import { BaseEndpointEntity } from '../../../common/entities/base-endpoint.entity';
+import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 
 @ObjectType()
 @Entity('settings')
-export class Setting extends BaseEndpointEntity {
+export class Setting extends BaseEntity {
   @Field(() => String)
   @PrimaryColumn({ type: 'varchar', length: 255 })
   public path: string;

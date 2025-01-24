@@ -19,4 +19,9 @@ export class AccountsResolver {
   public login(@Args('loginInput') loginInput: LoginInput) {
     console.log(loginInput);
   }
+
+  @Mutation(() => String)
+  public logout(user: any) {
+    //return this.auth.logout(user);
+  }
 }
