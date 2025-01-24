@@ -12,7 +12,7 @@ export class RoutesService {
     private readonly metaRepository: Repository<Meta>,
   ) {}
 
-  public findOneBySlug(slug: string): Promise<Meta> {
+  public findOneBySlug(slug: string): Promise<Meta | null> {
     return this.metaRepository.findOne({ where: { slug: slug } });
   }
 }

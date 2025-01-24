@@ -14,5 +14,5 @@ import { AppModule } from './app.module';
   app.setBaseViewsDir(join(process.cwd(), 'src/server/common/templates'));
   app.setViewEngine('hbs');
 
-  await app.listen(config.get('port'));
+  await app.listen(config.get('port', 3000));
 })();

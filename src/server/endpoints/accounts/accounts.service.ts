@@ -11,12 +11,10 @@ export class AccountsService {
     private readonly usersService: UsersService,
   ) {}
 
-  public validateUser(email: string, password: string): Promise<User> {
+  public validateUser(email: string, password: string): Promise<User | null> {
     const user = this.usersService.findOneByEmail(email);
 
-    if (user) {
-      return user;
-    }
+    return user;
   }
 
   public validateToken(payload: any) {}

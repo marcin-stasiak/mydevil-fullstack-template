@@ -22,28 +22,32 @@ export class CategoriesService {
     return this.categoryRepository.find({ relations: ['meta', 'entries'] });
   }
 
-  public findOneById(id: string): Promise<Category> {
+  public findOneById(id: string): Promise<Category | null> {
     return this.categoryRepository.findOne({ where: { id: id } });
   }
 
-  public findOneBySlug(slug: string): Promise<Category> {
+  public findOneBySlug(slug: string): Promise<Category | null> {
     return this.categoryRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
-  public async update(updateCategoryInput: UpdateCategoryInput): Promise<Category> {
+  public async update(updateCategoryInput: UpdateCategoryInput): Promise<Category | null> {
     const category = await this.categoryRepository.preload({ id: updateCategoryInput.id });
 
-    if (category) {
-      return this.categoryRepository.save(Object.assign(category, updateCategoryInput));
+    if (!category) {
+      return null;
     }
+
+    return this.categoryRepository.save(Object.assign(category, updateCategoryInput));
   }
 
-  public async remove(id: string): Promise<DeleteResult> {
+  public async remove(id: string): Promise<DeleteResult | null> {
     const category = await this.categoryRepository.preload({ id: id });
 
-    if (category) {
-      return this.categoryRepository.delete(category.id);
+    if (!category) {
+      return null;
     }
+
+    return this.categoryRepository.delete(category.id);
   }
 
   public count(): Promise<number> {

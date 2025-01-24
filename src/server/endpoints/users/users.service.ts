@@ -24,35 +24,39 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  public findOneById(id: string): Promise<User> {
+  public findOneById(id: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { id: id } });
   }
 
-  public findOneBySlug(slug: string): Promise<User> {
+  public findOneBySlug(slug: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
-  public findOneByEmail(email: string): Promise<User> {
+  public findOneByEmail(email: string): Promise<User | null> {
     return this.userRepository.findOne({
       where: { email: email },
       select: ['email', 'password'],
     });
   }
 
-  public async update(updateUserInput: UpdateUserInput): Promise<User> {
+  public async update(updateUserInput: UpdateUserInput): Promise<User | null> {
     const user = await this.userRepository.preload({ id: updateUserInput.id });
 
-    if (user) {
-      return this.userRepository.save(Object.assign(user, updateUserInput));
+    if (!user) {
+      return null;
     }
+
+    return this.userRepository.save(Object.assign(user, updateUserInput));
   }
 
-  public async remove(id: string): Promise<DeleteResult> {
+  public async remove(id: string): Promise<DeleteResult | null> {
     const user = await this.userRepository.preload({ id: id });
 
-    if (user) {
-      return this.userRepository.delete(user.id);
+    if (!user) {
+      return null;
     }
+
+    return this.userRepository.delete(user.id);
   }
 
   public count(): Promise<number> {

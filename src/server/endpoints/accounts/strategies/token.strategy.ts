@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
@@ -12,6 +12,7 @@ export class TokenStrategy extends PassportStrategy(Strategy) {
     private readonly config: ConfigService,
     private readonly accountsService: AccountsService,
   ) {
+    //@ts-ignore
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: config.get('app.tokenSecret'),

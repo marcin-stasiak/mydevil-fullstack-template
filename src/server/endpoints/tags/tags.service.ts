@@ -24,11 +24,11 @@ export class TagsService {
     return this.tagRepository.find();
   }
 
-  public findOneById(id: string): Promise<Tag> {
+  public findOneById(id: string): Promise<Tag | null> {
     return this.tagRepository.findOne({ where: { id: id } });
   }
 
-  public findOneBySlug(slug: string): Promise<Tag> {
+  public findOneBySlug(slug: string): Promise<Tag | null> {
     return this.tagRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 

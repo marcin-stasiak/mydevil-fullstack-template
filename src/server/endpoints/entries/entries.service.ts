@@ -17,37 +17,39 @@ export class EntriesService {
   public create(createEntryInput: CreateEntryInput): Promise<Entry> {
     const entry = this.entryRepository.create(createEntryInput);
 
-    if (entry) {
-      return this.entryRepository.save(entry);
-    }
+    return this.entryRepository.save(entry);
   }
 
   public findAll(): Promise<Entry[]> {
     return this.entryRepository.find();
   }
 
-  public findOneById(id: string): Promise<Entry> {
+  public findOneById(id: string): Promise<Entry | null> {
     return this.entryRepository.findOne({ where: { id: id } });
   }
 
-  public findOneBySlug(slug: string): Promise<Entry> {
+  public findOneBySlug(slug: string): Promise<Entry | null> {
     return this.entryRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
-  public update(updateEntryInput: UpdateEntryInput): Promise<Entry> {
-    const entry = this.entryRepository.preload({ id: updateEntryInput.id });
+  public async update(updateEntryInput: UpdateEntryInput): Promise<Entry | null> {
+    const entry = await this.entryRepository.preload({ id: updateEntryInput.id });
 
-    if (entry) {
-      return this.entryRepository.save(Object.assign(entry, updateEntryInput));
+    if (!entry) {
+      return null;
     }
+
+    return this.entryRepository.save(Object.assign(entry, updateEntryInput));
   }
 
-  public async remove(id: string): Promise<DeleteResult> {
+  public async remove(id: string): Promise<DeleteResult | null> {
     const entry = await this.entryRepository.preload({ id: id });
 
-    if (entry) {
-      return this.entryRepository.delete(entry.id);
+    if (!entry) {
+      return null;
     }
+
+    return this.entryRepository.delete(entry.id);
   }
 
   public count(): Promise<number> {

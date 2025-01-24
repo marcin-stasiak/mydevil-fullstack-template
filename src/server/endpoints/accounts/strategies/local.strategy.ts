@@ -15,12 +15,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  public validate(email: string, password: string): Promise<User> {
+  public validate(email: string, password: string): Promise<User | null> {
     const user = this.accountsService.validateUser(email, password);
 
-    if (!user) {
-      throw new UnauthorizedException();
-    }
+    // Return error here?
 
     return user;
   }

@@ -17,15 +17,17 @@ export class SettingsService {
     return this.settingRepository.find();
   }
 
-  public findOne(path: string): Promise<Setting> {
+  public findOne(path: string): Promise<Setting | null> {
     return this.settingRepository.findOne({ where: { path: path } });
   }
 
-  public update(updateSettingInput: UpdateSettingInput): Promise<Setting> {
-    const setting = this.settingRepository.preload({ path: updateSettingInput.path });
+  public async update(updateSettingInput: UpdateSettingInput): Promise<Setting | null> {
+    const setting = await this.settingRepository.preload({ path: updateSettingInput.path });
 
-    if (setting) {
-      return this.settingRepository.save(Object.assign(setting, updateSettingInput));
+    if (!setting) {
+      return null;
     }
+
+    return this.settingRepository.save(Object.assign(setting, updateSettingInput));
   }
 }
