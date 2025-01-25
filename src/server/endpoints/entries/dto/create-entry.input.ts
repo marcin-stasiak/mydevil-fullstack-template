@@ -12,9 +12,9 @@ export class CreateEntryInput extends BaseEndpointInput {
   @Field(() => String)
   public content: string;
 
-  @Field(() => EntryType)
+  @Field(() => EntryType, { defaultValue: EntryType.POST })
   public type?: EntryType;
 
-  @Field(() => EntryStatus)
+  @Field(() => EntryStatus, { defaultValue: EntryStatus.DRAFTED })
   public status?: EntryStatus;
 }
