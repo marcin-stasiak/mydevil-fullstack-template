@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
@@ -20,8 +20,8 @@ export class TagsService {
     return this.tagRepository.save(tag);
   }
 
-  public findAll(): Promise<Tag[]> {
-    return this.tagRepository.find();
+  public findAll(limit: number = 30, offset: number = 0): Promise<Tag[]> {
+    return this.tagRepository.find({ take: limit, skip: offset });
   }
 
   public findOneById(id: string): Promise<Tag | null> {
@@ -32,20 +32,24 @@ export class TagsService {
     return this.tagRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
   }
 
-  public async update(updateTagInput: UpdateTagInput) {
+  public async update(updateTagInput: UpdateTagInput): Promise<Tag | null> {
     const tag = await this.tagRepository.preload({ id: updateTagInput.id });
 
-    if (tag) {
-      return this.tagRepository.save(Object.assign(tag, updateTagInput));
+    if (!tag) {
+      return null;
     }
+
+    return this.tagRepository.save(Object.assign(tag, updateTagInput));
   }
 
-  public async remove(id: string) {
+  public async remove(id: string): Promise<DeleteResult | null> {
     const tag = await this.tagRepository.preload({ id: id });
 
-    if (tag) {
-      return this.tagRepository.delete(tag.id);
+    if (!tag) {
+      return null;
     }
+
+    return this.tagRepository.delete(tag.id);
   }
 
   public count(): Promise<number> {

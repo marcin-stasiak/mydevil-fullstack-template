@@ -15,8 +15,11 @@ export class EntriesResolver {
   }
 
   @Query(() => [Entry], { name: 'entries' })
-  public findAll() {
-    return this.entriesService.findAll();
+  public findAll(
+    @Args('limit', { type: () => Number, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Number, defaultValue: 0 }) offset: number,
+  ) {
+    return this.entriesService.findAll(limit, offset);
   }
 
   @Query(() => Entry, { name: 'entry' })

@@ -20,8 +20,8 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  public findAll(): Promise<User[]> {
-    return this.userRepository.find();
+  public findAll(limit: number = 30, offset: number = 0): Promise<User[]> {
+    return this.userRepository.find({ take: limit, skip: offset });
   }
 
   public findOneById(id: string): Promise<User | null> {

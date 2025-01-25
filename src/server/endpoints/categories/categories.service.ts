@@ -18,8 +18,8 @@ export class CategoriesService {
     return this.categoryRepository.save(category);
   }
 
-  public findAll(): Promise<Category[]> {
-    return this.categoryRepository.find({ relations: ['meta', 'entries'] });
+  public findAll(limit: number = 30, offset: number = 0): Promise<Category[]> {
+    return this.categoryRepository.find({ take: limit, skip: offset, relations: ['meta', 'entries'] });
   }
 
   public findOneById(id: string): Promise<Category | null> {

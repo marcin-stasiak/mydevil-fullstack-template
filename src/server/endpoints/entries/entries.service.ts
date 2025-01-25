@@ -20,8 +20,8 @@ export class EntriesService {
     return this.entryRepository.save(entry);
   }
 
-  public findAll(): Promise<Entry[]> {
-    return this.entryRepository.find();
+  public findAll(limit: number = 30, offset: number = 0): Promise<Entry[]> {
+    return this.entryRepository.find({ take: limit, skip: offset });
   }
 
   public findOneById(id: string): Promise<Entry | null> {

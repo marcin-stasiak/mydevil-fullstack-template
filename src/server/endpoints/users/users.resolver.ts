@@ -15,8 +15,11 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  public findAll() {
-    return this.usersService.findAll();
+  public findAll(
+    @Args('limit', { type: () => Number, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Number, defaultValue: 0 }) offset: number,
+  ) {
+    return this.usersService.findAll(limit, offset);
   }
 
   @Query(() => User, { name: 'user' })

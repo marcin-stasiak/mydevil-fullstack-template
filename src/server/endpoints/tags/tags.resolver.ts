@@ -15,8 +15,11 @@ export class TagsResolver {
   }
 
   @Query(() => [Tag], { name: 'tags' })
-  public findAll() {
-    return this.tagsService.findAll();
+  public findAll(
+    @Args('limit', { type: () => Number, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Number, defaultValue: 0 }) offset: number,
+  ) {
+    return this.tagsService.findAll(limit, offset);
   }
 
   @Query(() => Tag, { name: 'tag' })
