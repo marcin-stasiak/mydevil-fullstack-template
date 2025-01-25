@@ -27,8 +27,8 @@ import { RoutesService } from './routes.service';
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-        debug: config.get('development'),
-        playground: config.get('development'),
+        debug: config.get<boolean>('debug'),
+        playground: config.get<boolean>('development'),
       }),
       inject: [ConfigService],
     }),
@@ -44,8 +44,8 @@ import { RoutesService } from './routes.service';
         password: config.get('database.password'),
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         autoLoadEntities: true,
-        synchronize: config.get('development'),
-        logging: config.get('development'),
+        logging: config.get<boolean>('debug'),
+        synchronize: config.get<boolean>('development'),
       }),
       inject: [ConfigService],
     }),
@@ -58,7 +58,7 @@ export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}
 
   public configure(consumer: MiddlewareConsumer) {
-    if (this.config.get('development')) {
+    if (this.config.get<boolean>('development')) {
       consumer.apply(ClientMiddleware).exclude('graphql').forRoutes({ path: '*', method: RequestMethod.GET });
     } else {
       consumer.apply(ClientMiddleware).forRoutes({ path: '*', method: RequestMethod.GET });
