@@ -1,12 +1,16 @@
 import React, { ReactElement } from 'react';
 import { Outlet } from 'react-router';
+import { Header } from './components/header';
+import { Footer } from './components/footer';
 
 export const Layout = (): ReactElement => {
   return (
     <>
-      <main className='flex-grow'>
+      <Header/>
+      <main>
         <Outlet />
       </main>
+      <Footer/>
     </>
   );
 };
