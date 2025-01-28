@@ -1,10 +1,13 @@
-import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import { HttpStatus, Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { Request, Response } from 'express';
 import { readFile } from 'node:fs/promises';
 import { join } from 'path';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router';
 
+import { App } from '../../../client/app';
 import { RoutesService } from '../routes.service';
 
 interface Manifest extends JSON {
@@ -28,9 +31,22 @@ export class ClientMiddleware implements NestMiddleware {
     const meta = await this.routesService.findOneBySlug(request.path);
     const manifest = await this.manifest;
 
-    if (manifest) {
+    if (meta && manifest) {
+      const content = renderToString(StaticRouter({ location: request.path, children: App() }));
+
       response.render('index', {
+        lang: '',
+        title: meta?.title,
+        description: meta?.description,
+        content: content,
         scripts: manifest?.main,
+      });
+    } else {
+      response.status(HttpStatus.NOT_FOUND);
+      response.render('error', {
+        lang: '',
+        title: '',
+        description: '',
       });
     }
   }
@@ -39,7 +55,7 @@ export class ClientMiddleware implements NestMiddleware {
     try {
       const buffer = await readFile(join('public', 'assets', 'manifest.json'));
 
-      return JSON.parse(buffer.toString());
+      return JSON.parse(buffer.toString()) as Manifest;
     } catch ({ message }) {
       this.logger.error(message);
     }

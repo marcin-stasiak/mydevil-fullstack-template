@@ -6,6 +6,7 @@ const production = process.env.NODE_ENV === 'production';
 const options = {
   entryPoints: ['src/client/main.tsx'],
   outdir: 'public/assets',
+  format: 'cjs',
   bundle: true,
   minify: production,
   sourcemap: !production,

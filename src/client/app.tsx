@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
 
 import { Layout } from './layout';
