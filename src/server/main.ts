@@ -10,7 +10,9 @@ import { AppModule } from './app.module';
   const app: NestExpressApplication = await NestFactory.create(AppModule);
   const config: ConfigService = app.get(ConfigService);
 
-  app.useStaticAssets(join(process.cwd(), 'public'));
+  if (config.get('app.serveStatic')) {
+    app.useStaticAssets(join(process.cwd(), 'public'));
+  }
   app.setBaseViewsDir(join(process.cwd(), 'src/server/common/templates'));
   app.setViewEngine('hbs');
 
