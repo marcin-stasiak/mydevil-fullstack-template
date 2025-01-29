@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export PATH=/usr/local/bin:$PATH
 export CC=gcc
 export CXX=g++
 
