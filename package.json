@@ -19,6 +19,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@apollo/client": "^3.12.8",
     "@apollo/server": "^4.11.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
