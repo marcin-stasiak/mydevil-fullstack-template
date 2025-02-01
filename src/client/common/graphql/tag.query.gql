@@ -1,0 +1,11 @@
+query ($slug: String!) {
+    tag(slug: $slug) {
+        id
+        title
+        meta {
+            slug
+            title
+            description
+        }
+    }
+}

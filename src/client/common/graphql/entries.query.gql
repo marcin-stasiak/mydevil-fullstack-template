@@ -1,0 +1,14 @@
+query($limit: Int, $offset: Int) {
+    entries(limit: $limit, offset: $offset) {
+        id
+        title
+        author {
+            id
+        }
+        meta {
+            slug
+            title
+            description
+        }
+    }
+}
