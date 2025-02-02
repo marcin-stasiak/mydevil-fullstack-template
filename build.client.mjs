@@ -4,6 +4,8 @@ import cleanPlugin from 'esbuild-plugin-clean';
 import manifestPlugin from 'esbuild-plugin-manifest';
 
 const production = process.env.NODE_ENV === 'production';
+const baseURL = JSON.stringify(process.env.APP_BASE_URL);
+
 const options = {
   entryPoints: ['src/client/main.tsx', 'src/client/global.css'],
   outdir: 'public/assets',
@@ -11,6 +13,9 @@ const options = {
   bundle: true,
   minify: production,
   sourcemap: !production,
+  define: {
+    'process.env.APP_BASE_URL': baseURL,
+  },
   plugins: [
     cleanPlugin({ cleanOnStartPatterns: ['public/assets'] }),
     manifestPlugin({ extensionless: 'input', hash: production, shortNames: true }),
