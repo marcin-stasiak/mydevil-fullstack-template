@@ -13,6 +13,7 @@ import { RoutesService } from '../routes.service';
 
 interface Manifest extends JSON {
   main: string;
+  global: string;
 }
 
 @Injectable()
@@ -40,6 +41,7 @@ export class ClientMiddleware implements NestMiddleware {
         lang: language,
         title: meta?.title,
         description: meta?.description,
+        styles: manifest?.global,
         content: content,
         scripts: manifest?.main,
       });

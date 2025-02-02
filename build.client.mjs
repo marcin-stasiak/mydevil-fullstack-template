@@ -5,7 +5,7 @@ import manifestPlugin from 'esbuild-plugin-manifest';
 
 const production = process.env.NODE_ENV === 'production';
 const options = {
-  entryPoints: ['src/client/main.tsx'],
+  entryPoints: ['src/client/main.tsx', 'src/client/global.css'],
   outdir: 'public/assets',
   format: 'cjs',
   bundle: true,
