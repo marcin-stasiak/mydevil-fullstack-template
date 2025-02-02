@@ -1,4 +1,5 @@
 // @ts-check
+import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginReact from 'eslint-plugin-react';
 import globals from 'globals';
@@ -8,7 +9,7 @@ export default lint.config(
   {
     ignores: ['eslint.config.mjs'],
   },
-  lint.configs.recommended,
+  eslint.configs.recommended,
   ...lint.configs.recommendedTypeChecked,
   eslintPluginPrettierRecommended,
   eslintPluginReact,
