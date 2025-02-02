@@ -6,11 +6,11 @@ import { Footer } from './components/footer';
 export const Layout = (): ReactElement => {
   return (
     <>
-      <Header/>
+      <Header />
       <main>
         <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };

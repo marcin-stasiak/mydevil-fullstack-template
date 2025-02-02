@@ -1,14 +1,14 @@
 query ($slug: String!) {
-    entry(slug: $slug) {
-        id
-        title
-        author {
-            id
-        }
-        meta {
-            slug
-            title
-            description
-        }
+  entry(slug: $slug) {
+    id
+    title
+    author {
+      id
     }
+    meta {
+      slug
+      title
+      description
+    }
+  }
 }

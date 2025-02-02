@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node --env-file=.env client.mjs && nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.{gql,hbs,ts,tsx}\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
     "start": "nest start",
     "start:dev": "concurrently -n \"Client,Server\" \"node --env-file=.env client.mjs\" \"nest start --watch\"",
     "start:debug": "nest start --debug --watch",
@@ -19,7 +19,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.8",
     "@apollo/server": "^4.11.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

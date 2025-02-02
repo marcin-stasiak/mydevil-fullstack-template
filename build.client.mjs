@@ -1,3 +1,4 @@
+// @ts-check
 import esbuild from 'esbuild';
 import cleanPlugin from 'esbuild-plugin-clean';
 import manifestPlugin from 'esbuild-plugin-manifest';

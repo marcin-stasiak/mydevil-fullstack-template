@@ -4,10 +4,8 @@ import React from 'react';
 
 export const Header = () => {
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        My Devils
-      </Toolbar>
+    <AppBar position='fixed'>
+      <Toolbar>My Devils</Toolbar>
     </AppBar>
-  )
-}
+  );
+};

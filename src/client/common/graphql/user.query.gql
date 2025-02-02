@@ -1,11 +1,11 @@
 query ($slug: String!) {
-    user(slug: $slug) {
-        id
-        gender
-        meta {
-            slug
-            title
-            description
-        }
+  user(slug: $slug) {
+    id
+    gender
+    meta {
+      slug
+      title
+      description
     }
+  }
 }

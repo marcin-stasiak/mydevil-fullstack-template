@@ -1,11 +1,11 @@
-query($limit: Int, $offset: Int) {
-    categories(limit: $limit, offset: $offset) {
-        id
-        title
-        meta {
-            slug
-            title
-            description
-        }
+query ($limit: Int, $offset: Int) {
+  categories(limit: $limit, offset: $offset) {
+    id
+    title
+    meta {
+      slug
+      title
+      description
     }
+  }
 }
