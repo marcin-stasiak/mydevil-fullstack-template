@@ -4,7 +4,7 @@ import cleanPlugin from 'esbuild-plugin-clean';
 import manifestPlugin from 'esbuild-plugin-manifest';
 
 const production = process.env.NODE_ENV === 'production';
-const baseURL = JSON.stringify(process.env.APP_BASE_URL);
+const baseURL = JSON.stringify(process.env.APP_BASE_URL || 'http://localhost:3000');
 
 const options = {
   entryPoints: ['src/client/main.tsx', 'src/client/global.css'],
