@@ -2,7 +2,11 @@
   "name": "mydevil-fullstack-template",
   "version": "0.0.1-beta",
   "description": "Fullstack template for web applications based on NestJS, PostgreSQL and React running on MyDevil hosting.",
-  "author": "Marcin Stasiak",
+  "author": {
+    "name": "Marcin Stasiak",
+    "email": "dev@marcinstasiak.pl",
+    "url": "https://marcinstasiak.pl"
+  },
   "license": "MIT",
   "scripts": {
     "build": "node --env-file=.env build.client.mjs && nest build",
