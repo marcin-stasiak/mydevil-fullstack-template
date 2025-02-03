@@ -1,5 +1,7 @@
+const baseURL = process.env.APP_BASE_URL || 'http://localhost:3000';
+
 export const client = async (query: string, variables: Record<string, any> = {}) => {
-  const response = await fetch('https://flyby-router-demo.herokuapp.com/', {
+  const response = await fetch(baseURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
