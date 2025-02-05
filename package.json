@@ -28,7 +28,7 @@
     "@apollo/server": "^4.11.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.1",
+    "@mui/material": "^6.4.3",
     "@nestjs/apollo": "^13.0.2",
     "@nestjs/common": "^11.0.7",
     "@nestjs/config": "^4.0.0",
