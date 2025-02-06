@@ -16,8 +16,8 @@ export class CategoriesResolver {
 
   @Query(() => [Category], { name: 'categories' })
   public findAll(
-    @Args('limit', { type: () => Int, defaultValue: 30 }) limit: number,
-    @Args('offset', { type: () => Int, defaultValue: 0 }) offset: number,
+    @Args('limit', { type: () => Int, nullable: true, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Int, nullable: true, defaultValue: 0 }) offset: number,
   ) {
     return this.categoriesService.findAll(limit, offset);
   }
