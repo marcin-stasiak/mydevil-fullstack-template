@@ -4,7 +4,7 @@ export CC=gcc
 export CXX=g++
 
 echo "Install modules..."
-npm22 install --prefix "$(dirname "$0")"
+yarn22 install
 
 echo "Build application..."
-npm22 run build --prefix "$(dirname "$0")"
+yarn22 run build
