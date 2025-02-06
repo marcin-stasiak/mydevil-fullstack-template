@@ -5,6 +5,10 @@ export const ENTRIES_QUERY = gql`
     entries(limit: $limit, offset: $offset) {
       id
       title
+      content
+      #        author {
+      #            id
+      #        }
       meta {
         slug
         title

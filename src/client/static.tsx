@@ -1,10 +1,9 @@
 import { StaticRouter } from 'react-router';
 import { App } from './app';
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './common/client';
+import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/client';
 
-export const StaticMain = ({ location }) => (
+export const StaticMain = (location: string, client: ApolloClient<NormalizedCacheObject>) => (
   <ApolloProvider client={client}>
     <StaticRouter location={location}>
       <App />

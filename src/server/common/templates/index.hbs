@@ -12,6 +12,9 @@
   </head>
   <body>
     <div id="root">{{{ content }}}</div>
+    <script>
+      window.__APOLLO_STATE__ = {{{ state }}};
+    </script>
     <script src="/assets/{{ scripts }}"></script>
   </body>
 </html>

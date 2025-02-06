@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 
 import { renderToString } from 'react-dom/server';
 
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { getDataFromTree, renderToStringWithData } from '@apollo/client/react/ssr';
 import { Request, Response } from 'express';
 import { readFile } from 'node:fs/promises';
 import { join } from 'path';
@@ -19,6 +21,7 @@ interface Manifest extends JSON {
 export class ClientMiddleware implements NestMiddleware {
   private readonly logger: Logger;
   private readonly manifest: Promise<Manifest | null>;
+  private readonly link: HttpLink;
 
   constructor(
     private readonly config: ConfigService,
@@ -26,15 +29,25 @@ export class ClientMiddleware implements NestMiddleware {
   ) {
     this.logger = new Logger(ClientMiddleware.name);
     this.manifest = this.getManifest();
+    this.link = new HttpLink({
+      uri: `${config.get('app.baseURL')}/graphql`,
+      credentials: 'same-origin',
+    });
   }
 
   public async use(request: Request, response: Response) {
     const meta = await this.routesService.findOneBySlug(request.path);
     const manifest = await this.manifest;
     const language = this.config.get<string>('app.language');
+    const client = new ApolloClient({
+      ssrMode: true,
+      link: this.link,
+      cache: new InMemoryCache(),
+    });
 
     if (meta && manifest) {
-      const content = renderToString(StaticMain({ location: request.path }));
+      const content = await getDataFromTree(StaticMain(request.path, client));
+      const state = JSON.stringify(client.extract());
 
       response.render('index', {
         lang: language,
@@ -42,6 +55,7 @@ export class ClientMiddleware implements NestMiddleware {
         description: meta?.description,
         styles: manifest?.global,
         content: content,
+        state: state,
         scripts: manifest?.main,
       });
     } else {

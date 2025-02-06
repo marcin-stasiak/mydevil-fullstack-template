@@ -21,7 +21,7 @@ export class EntriesService {
   }
 
   public findAll(limit: number = 30, offset: number = 0): Promise<Entry[]> {
-    return this.entryRepository.find({ take: limit, skip: offset });
+    return this.entryRepository.find({ take: limit, skip: offset, relations: ['meta'] });
   }
 
   public findOneById(id: string): Promise<Entry | null> {

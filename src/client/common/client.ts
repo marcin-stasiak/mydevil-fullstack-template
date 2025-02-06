@@ -1,28 +1,30 @@
-import { ApolloClient, createHttpLink, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
-
-import { isSSR } from './utilities';
 
 const baseURL = process.env.APP_BASE_URL || 'http://localhost:3000';
 
-const cache = new InMemoryCache();
-
-if (!isSSR()) {
-  const storage = new LocalStorageWrapper(window.localStorage);
-
-  persistCache({
+const persist = async (cache: InMemoryCache, storage: LocalStorageWrapper) => {
+  await persistCache({
     cache: cache,
     storage: storage,
-  }).then();
-}
+  });
+};
 
-const link = createHttpLink({
-  uri: `${baseURL}/graphql`,
-  credentials: 'same-origin',
-});
+export const client = () => {
+  const cache = new InMemoryCache().restore(window['__APOLLO_STATE__']);
+  const storage = new LocalStorageWrapper(window.localStorage);
 
-export const client = new ApolloClient({
-  ssrMode: isSSR(),
-  link: link,
-  cache: cache,
-});
+  (async function () {
+    await persist(cache, storage);
+  })();
+
+  const link = createHttpLink({
+    uri: `${baseURL}/graphql`,
+    credentials: 'same-origin',
+  });
+
+  return new ApolloClient({
+    link: link,
+    cache: cache,
+  });
+};
