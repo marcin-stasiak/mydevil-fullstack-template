@@ -4,16 +4,17 @@ import cleanPlugin from 'esbuild-plugin-clean';
 import manifestPlugin from 'esbuild-plugin-manifest';
 
 const production = process.env.NODE_ENV === 'production';
+const title = JSON.stringify('browser');
 const baseURL = JSON.stringify(process.env.APP_BASE_URL || 'http://localhost:3000');
 
 const options = {
   entryPoints: ['src/client/main.tsx', 'src/client/global.css'],
   outdir: 'public/assets',
-  format: 'cjs',
   bundle: true,
   minify: production,
   sourcemap: !production,
   define: {
+    'process.title': title,
     'process.env.APP_BASE_URL': baseURL,
   },
   plugins: [
