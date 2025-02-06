@@ -2,13 +2,12 @@ import { HttpStatus, Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router';
 
 import { Request, Response } from 'express';
 import { readFile } from 'node:fs/promises';
 import { join } from 'path';
 
-import { App } from '../../../client/app';
+import { StaticMain } from '../../../client/static';
 import { RoutesService } from '../routes.service';
 
 interface Manifest extends JSON {
@@ -35,7 +34,7 @@ export class ClientMiddleware implements NestMiddleware {
     const language = this.config.get<string>('app.language');
 
     if (meta && manifest) {
-      const content = renderToString(StaticRouter({ location: request.path, children: App() }));
+      const content = renderToString(StaticMain({ location: request.path }));
 
       response.render('index', {
         lang: language,
