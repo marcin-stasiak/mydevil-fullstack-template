@@ -12,7 +12,6 @@ export class CategoriesService {
   constructor(@InjectRepository(Category) private readonly categoryRepository: Repository<Category>) {}
 
   public create(createCategoryInput: CreateCategoryInput): Promise<Category> {
-    console.log(createCategoryInput);
     const category = this.categoryRepository.create(createCategoryInput);
 
     return this.categoryRepository.save(category);

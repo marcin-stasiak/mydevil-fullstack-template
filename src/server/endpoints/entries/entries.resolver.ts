@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { CreateEntryInput } from './dto/create-entry.input';
 import { UpdateEntryInput } from './dto/update-entry.input';
@@ -16,8 +16,8 @@ export class EntriesResolver {
 
   @Query(() => [Entry], { name: 'entries' })
   public findAll(
-    @Args('limit', { type: () => Number, defaultValue: 30 }) limit: number,
-    @Args('offset', { type: () => Number, defaultValue: 0 }) offset: number,
+    @Args('limit', { type: () => Int, nullable: true, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Int, nullable: true, defaultValue: 0 }) offset: number,
   ) {
     return this.entriesService.findAll(limit, offset);
   }
@@ -37,7 +37,7 @@ export class EntriesResolver {
     return this.entriesService.remove(id);
   }
 
-  @Query(() => Number, { name: 'countEntries' })
+  @Query(() => Int, { name: 'countEntries' })
   public count() {
     return this.entriesService.count();
   }

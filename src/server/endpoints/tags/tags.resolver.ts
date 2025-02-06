@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
@@ -16,8 +16,8 @@ export class TagsResolver {
 
   @Query(() => [Tag], { name: 'tags' })
   public findAll(
-    @Args('limit', { type: () => Number, defaultValue: 30 }) limit: number,
-    @Args('offset', { type: () => Number, defaultValue: 0 }) offset: number,
+    @Args('limit', { type: () => Int, defaultValue: 30 }) limit: number,
+    @Args('offset', { type: () => Int, defaultValue: 0 }) offset: number,
   ) {
     return this.tagsService.findAll(limit, offset);
   }
@@ -37,7 +37,7 @@ export class TagsResolver {
     return this.tagsService.remove(id);
   }
 
-  @Query(() => Number, { name: 'countTags' })
+  @Query(() => Int, { name: 'countTags' })
   public count() {
     return this.tagsService.count();
   }
