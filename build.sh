@@ -4,7 +4,7 @@ export CC=gcc
 export CXX=g++
 
 echo "Install modules..."
-yarn22 install --cwd "$(dirname "$0")"
+yarn22 --cwd "$(dirname "$0")" install
 
 echo "Build application..."
-yarn22 run build --cwd "$(dirname "$0")"
+yarn22 --cwd "$(dirname "$0")" run build
