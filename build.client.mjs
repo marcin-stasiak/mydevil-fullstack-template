@@ -8,7 +8,7 @@ const title = JSON.stringify('browser');
 const baseURL = JSON.stringify(process.env.APP_BASE_URL || 'http://localhost:3000');
 
 const options = {
-  entryPoints: ['src/client/main.tsx', 'src/client/global.css'],
+  entryPoints: ['src/client/main.tsx'],
   outdir: 'public/assets',
   bundle: true,
   minify: production,

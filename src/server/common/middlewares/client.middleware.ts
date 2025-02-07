@@ -1,10 +1,8 @@
 import { HttpStatus, Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { renderToString } from 'react-dom/server';
-
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import { getDataFromTree, renderToStringWithData } from '@apollo/client/react/ssr';
+import { getDataFromTree } from '@apollo/client/react/ssr';
 import { Request, Response } from 'express';
 import { readFile } from 'node:fs/promises';
 import { join } from 'path';
@@ -53,7 +51,6 @@ export class ClientMiddleware implements NestMiddleware {
         lang: language,
         title: meta?.title,
         description: meta?.description,
-        styles: manifest?.global,
         content: content,
         state: state,
         scripts: manifest?.main,
