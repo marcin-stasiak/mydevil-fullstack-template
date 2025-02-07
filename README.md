@@ -2,7 +2,7 @@
 
 ## Description
 
-Fullstack template for web applications based on [NestJS](https://nestjs.com/), [PostgreSQL](https://postgresql.org/) and [React](https://react.dev/) running on [MyDevil](https://mydevil.net/) hosting. Using the [SWC](https://swc.rs/) compiler was not possible due to lack of support for the FreeBSD operating system and the [Phusion Passenger](https://phusionpassenger.com/) configuration requires to be run from the `app.js` file.
+Fullstack template for web applications based on [NestJS](https://nestjs.com/), [PostgreSQL](https://postgresql.org/) and [React](https://react.dev/) running on [MyDevil](https://mydevil.net/) hosting. Using the [SWC](https://swc.rs/) compiler was not possible due to lack of support for the FreeBSD operating system and the [Phusion Passenger](https://phusionpassenger.com/) configuration requires to be run from the `app.js` file. Template is dedicated to a specific hosting but should work with any modern cloud.
 
 ## Project setup
 
