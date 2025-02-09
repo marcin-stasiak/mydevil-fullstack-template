@@ -7,13 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { join } from 'path';
 
-import appConfig from './configs/app.config';
-import databaseConfig from './configs/database.config';
-import serverConfig from './configs/server.config';
+import { appConfig, databaseConfig, serverConfig } from './configs';
 import { Meta } from './entities/meta-endpoint.entity';
-import { ClientMiddleware } from './middlewares/client.middleware';
-import { CompressionMiddleware } from './middlewares/compression.middleware';
-import { SecureMiddleware } from './middlewares/secure.middleware';
+import { ClientMiddleware, CompressionMiddleware, SecureMiddleware } from './middlewares';
 import { RoutesService } from './routes.service';
 
 @Global()
