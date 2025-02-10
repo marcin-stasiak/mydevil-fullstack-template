@@ -1,10 +1,12 @@
 import React from 'react';
-import Container from '@mui/material/Container';
+import { Box, Container, Typography } from '@mui/material';
 
 export const Footer = () => {
   return (
-    <Container component='footer'>
-      <p>© 2025, All Rights Reserved</p>
-    </Container>
+    <Box component='footer'>
+      <Container>
+        <Typography component='small'>© 2025, All Rights Reserved</Typography>
+      </Container>
+    </Box>
   );
 };
