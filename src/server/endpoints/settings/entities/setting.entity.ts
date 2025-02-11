@@ -7,9 +7,9 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 export class Setting extends BaseEntity {
   @Field(() => String)
   @PrimaryColumn({ type: 'varchar', length: 255 })
-  public path: string;
+  public name: string;
 
   @Field(() => String)
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'jsonb', nullable: false })
   public value: string;
 }
