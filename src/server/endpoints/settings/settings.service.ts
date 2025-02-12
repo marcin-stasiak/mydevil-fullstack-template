@@ -17,12 +17,12 @@ export class SettingsService {
     return this.settingRepository.find();
   }
 
-  public findOne(path: string): Promise<Setting | null> {
-    return this.settingRepository.findOne({ where: { path: path } });
+  public findOneByName(name: string): Promise<Setting | null> {
+    return this.settingRepository.findOne({ where: { name: name } });
   }
 
   public async update(updateSettingInput: UpdateSettingInput): Promise<Setting | null> {
-    const setting = await this.settingRepository.preload({ path: updateSettingInput.path });
+    const setting = await this.settingRepository.preload({ name: updateSettingInput.name });
 
     if (!setting) {
       return null;

@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
+import { GraphQLJSON } from 'graphql-scalars';
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 
 @ObjectType()
@@ -9,7 +10,7 @@ export class Setting extends BaseEntity {
   @PrimaryColumn({ type: 'varchar', length: 255 })
   public name: string;
 
-  @Field(() => String)
+  @Field(() => GraphQLJSON)
   @Column({ type: 'jsonb', nullable: false })
-  public value: string;
+  public value: JSON;
 }

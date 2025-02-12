@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { GraphQLJSON } from 'graphql-scalars';
 import { join } from 'path';
 
 import { appConfig, databaseConfig, serverConfig } from './configs';
@@ -23,6 +24,7 @@ import { RoutesService } from './routes.service';
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        resolvers: { JSON: GraphQLJSON },
         debug: config.get<boolean>('debug'),
         playground: config.get<boolean>('development'),
       }),

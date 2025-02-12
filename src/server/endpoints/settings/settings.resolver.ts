@@ -14,8 +14,8 @@ export class SettingsResolver {
   }
 
   @Query(() => Setting, { name: 'setting' })
-  public findOne(@Args('path', { type: () => String }) path: string) {
-    return this.settingsService.findOne(path);
+  public findOne(@Args('name', { type: () => String }) name: string) {
+    return this.settingsService.findOneByName(name);
   }
 
   @Mutation(() => Setting)

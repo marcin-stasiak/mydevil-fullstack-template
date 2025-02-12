@@ -3,7 +3,7 @@ import { InputType, Field } from '@nestjs/graphql';
 @InputType()
 export class UpdateSettingInput {
   @Field(() => String)
-  public path: string;
+  public name: string;
 
   @Field(() => String)
   public value: string;
