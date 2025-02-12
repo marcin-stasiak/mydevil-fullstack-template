@@ -16,7 +16,7 @@ export default {
   plugins: ['@trivago/prettier-plugin-sort-imports'],
   overrides: [
     {
-      files: '*.hbs',
+      files: '*.ejs',
       options: {
         parser: 'html',
       },

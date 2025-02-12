@@ -14,7 +14,7 @@ import { AppModule } from './app.module';
     app.useStaticAssets(join(process.cwd(), 'public'));
   }
   app.setBaseViewsDir(join(process.cwd(), 'src/server/common/templates'));
-  app.setViewEngine('hbs');
+  app.setViewEngine('ejs');
 
   await app.listen(config.get('port', 3000));
 })();
