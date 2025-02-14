@@ -1,5 +1,6 @@
 # Not obvious things that should be done
 
+- [ ] Use Apollo client for local state management
 - [ ] Use React Router links
 - [ ] ⭐ Create basic migrations with example data
 - [ ] Update props for all React components
