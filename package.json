@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node --env-file=.env build.client.mjs && nest build",
-    "format": "prettier --write \"src/**/*.{css,gql,ejs,ts,tsx}\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.{css,ejs,gql,ts,tsx}\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
     "start": "nest start",
     "start:dev": "concurrently -n \"Client,Server\" \"npm run watch:client\" \"npm run watch:server\"",
