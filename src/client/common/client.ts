@@ -1,7 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
 
-const baseURL = process.env.APP_BASE_URL || 'http://localhost:3000';
+import { baseURL } from './utilities';
 
 const persist = async (cache: InMemoryCache, storage: LocalStorageWrapper) => {
   await persistCache({
