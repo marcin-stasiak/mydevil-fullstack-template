@@ -22,7 +22,12 @@ export class EntriesService {
   }
 
   public findAll(type: EntryType, limit: number = 30, offset: number = 0): Promise<Entry[]> {
-    return this.entryRepository.find({ where: { type: type }, take: limit, skip: offset, relations: ['meta'] });
+    return this.entryRepository.find({
+      where: { type: type },
+      take: limit,
+      skip: offset,
+      relations: ['meta'],
+    });
   }
 
   public findOneById(id: string): Promise<Entry | null> {

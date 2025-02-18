@@ -1,11 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const ENTRIES_QUERY = gql`
-  query ($limit: Int, $offset: Int) {
-    entries(limit: $limit, offset: $offset) {
+  query ($type: EntryType, $limit: Int, $offset: Int) {
+    entries(type: $type, limit: $limit, offset: $offset) {
       id
       title
       content
+      type
+      status
       #        author {
       #            id
       #        }

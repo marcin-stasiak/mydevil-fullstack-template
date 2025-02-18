@@ -5,9 +5,12 @@ export const ENTRY_QUERY = gql`
     entry(slug: $slug) {
       id
       title
-      author {
-        id
-      }
+      content
+      type
+      status
+      #      author {
+      #        id
+      #      }
       meta {
         slug
         title
