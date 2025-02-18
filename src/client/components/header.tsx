@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { Link as RouterLink } from 'react-router';
 import { AppBar, Box, Button, ButtonGroup, Container, Drawer, IconButton, Link, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useQuery } from '@apollo/client';
 import { SETTING_QUERY } from '../common/graphql/setting.query';
 
-export const Header = () => {
+export const Header: FunctionComponent = () => {
   const { data: menuMain } = useQuery(SETTING_QUERY, {
     variables: {
       name: 'menu_main',
@@ -27,41 +28,46 @@ export const Header = () => {
               <MenuIcon />
             </IconButton>
             <Link
-              noWrap
-              component='a'
-              href='/'
+              component={RouterLink}
+              to='/'
               sx={{
                 display: 'flex',
-                flexGrow: { sx: 1, md: 0 },
+                flexGrow: { xs: 1, md: 0 },
+                justifyContent: 'center',
                 color: 'inherit',
                 fontStyle: '22px',
                 fontWeight: '700',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                mr: 2,
+                mr: { xs: 6, md: 2 },
               }}
             >
               My Devils
             </Link>
             <Box component='nav' sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, justifyContent: 'center' }}>
               {menuMain?.setting?.value?.map((item: { link: string; content: string }) => (
-                <Link key={item.link} href={item.link} sx={{ color: 'inherit', mx: 1 }}>
+                <Link
+                  key={item.link}
+                  component={RouterLink}
+                  to={item.link}
+                  sx={{ color: 'inherit', fontWeight: 300, mx: 3 }}
+                >
                   {item.content}
                 </Link>
               ))}
             </Box>
-            <ButtonGroup variant='text' aria-label='Login and register'>
-              <Button href='/login' sx={{ color: 'inherit' }}>
+            <ButtonGroup variant='text' aria-label='Login and register' sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Button component={RouterLink} to='/login' sx={{ color: 'inherit' }}>
                 Login
               </Button>
-              <Button href='/register' sx={{ color: 'inherit' }}>
+              <Button component={RouterLink} to='/register' sx={{ color: 'inherit' }}>
                 Register
               </Button>
             </ButtonGroup>
           </Toolbar>
         </Container>
       </AppBar>
-      <Drawer>dd</Drawer>
+      <Drawer>AABBCC</Drawer>
     </>
   );
 };
