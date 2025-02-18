@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { DeleteResult, Repository } from 'typeorm';
 
+import { EntryType } from '../../common/enums/entry-type.enum';
 import { CreateEntryInput } from './dto/create-entry.input';
 import { UpdateEntryInput } from './dto/update-entry.input';
 import { Entry } from './entities/entry.entity';
@@ -20,8 +21,8 @@ export class EntriesService {
     return this.entryRepository.save(entry);
   }
 
-  public findAll(limit: number = 30, offset: number = 0): Promise<Entry[]> {
-    return this.entryRepository.find({ take: limit, skip: offset, relations: ['meta'] });
+  public findAll(type: EntryType, limit: number = 30, offset: number = 0): Promise<Entry[]> {
+    return this.entryRepository.find({ where: { type: type }, take: limit, skip: offset, relations: ['meta'] });
   }
 
   public findOneById(id: string): Promise<Entry | null> {

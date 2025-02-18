@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
+import { EntryType } from '../../common/enums/entry-type.enum';
 import { CreateEntryInput } from './dto/create-entry.input';
 import { UpdateEntryInput } from './dto/update-entry.input';
 import { Entry } from './entities/entry.entity';
@@ -16,10 +17,11 @@ export class EntriesResolver {
 
   @Query(() => [Entry], { name: 'entries' })
   public findAll(
+    @Args('type', { type: () => EntryType, nullable: true }) type: EntryType,
     @Args('limit', { type: () => Int, nullable: true, defaultValue: 30 }) limit: number,
     @Args('offset', { type: () => Int, nullable: true, defaultValue: 0 }) offset: number,
   ) {
-    return this.entriesService.findAll(limit, offset);
+    return this.entriesService.findAll(type, limit, offset);
   }
 
   @Query(() => Entry, { name: 'entry' })
