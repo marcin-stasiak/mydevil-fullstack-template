@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Outlet } from 'react-router';
 import { Box } from '@mui/material';
 
