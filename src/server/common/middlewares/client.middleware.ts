@@ -43,14 +43,15 @@ export class ClientMiddleware implements NestMiddleware {
       cache: new InMemoryCache(),
     });
 
-    if (meta && manifest) {
+    // if (meta && manifest) {
+    if (manifest) {
       const content = await getDataFromTree(StaticMain(request.path, client));
       const state = JSON.stringify(client.extract());
 
       response.render('index', {
         lang: language,
-        title: meta?.title,
-        description: meta?.description,
+        title: meta?.title || 'DD',
+        description: meta?.description || 'DD',
         content: content,
         state: state,
         scripts: manifest?.main,

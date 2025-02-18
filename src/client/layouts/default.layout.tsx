@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Outlet } from 'react-router';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
 import { Box } from '@mui/material';
 
-export const Layout = (): ReactElement => {
+export const DefaultLayout: FunctionComponent = () => {
   return (
     <>
       <Header />
