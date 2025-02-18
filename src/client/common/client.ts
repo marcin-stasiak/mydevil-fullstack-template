@@ -26,5 +26,10 @@ export const client = () => {
   return new ApolloClient({
     link: link,
     cache: cache,
+    defaultOptions: {
+      watchQuery: {
+        nextFetchPolicy: 'cache-only',
+      },
+    },
   });
 };
