@@ -7,14 +7,15 @@ import { unstable_ClassNameGenerator as ClassNameGenerator } from '@mui/material
 import { theme } from './common/theme';
 import { LoginPage } from './pages/login.page';
 import { RegisterPage } from './pages/register.page';
-import { ArticlePage } from './pages/article.page';
 import { AdminLayout } from './layouts/admin.layout';
 import { FullLayout } from './layouts/full.layout';
 import { adminPath, isClientRenderMode } from './common/utilities';
 import { AdminPage } from './pages/admin/admin.page';
-import { PostPage } from './pages/post.page';
 import { ContactPage } from './pages/contact.page';
 import { ErrorPage } from './pages/error.page';
+import { TagPage } from './pages/tag.page';
+import { CategoryPage } from './pages/category.page';
+import { EntryPage } from './pages/entry.page';
 
 ClassNameGenerator.configure((componentName) => componentName.replace('Mui', '').toLowerCase());
 
@@ -32,11 +33,12 @@ export const App: FunctionComponent = () => (
       </Route>
 
       <Route element={<DefaultLayout />}>
-        <Route path='' element={<HomePage />} />
-        <Route path=':slug' element={<PostPage />} />
-        <Route path=':slug' element={<ArticlePage />} />
+        <Route index element={<HomePage />} />
+        <Route path=':slug' element={<EntryPage />} />
+        <Route path='tag/:slug' element={<TagPage />} />
+        <Route path='category/:slug' element={<CategoryPage />} />
         <Route path='contact' element={<ContactPage />} />
-        <Route path='*' element={<ErrorPage />} />
+        <Route element={<ErrorPage />} />
       </Route>
     </Routes>
   </ThemeProvider>
