@@ -1,7 +1,7 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum EntryType {
-  ARTICLE = 'article',
+  PAGE = 'page',
   POST = 'post',
 }
 

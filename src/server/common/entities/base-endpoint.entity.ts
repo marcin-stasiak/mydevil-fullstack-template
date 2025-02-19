@@ -1,8 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { BaseEntity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-
-import { Meta } from './meta-endpoint.entity';
+import { BaseEntity, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @ObjectType()
 export abstract class BaseEndpointEntity extends BaseEntity {
@@ -10,8 +8,11 @@ export abstract class BaseEndpointEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
-  @Field(() => Meta)
-  @OneToOne(() => Meta, { cascade: true })
-  @JoinColumn({ name: 'meta_slug' })
-  public meta: Meta;
+  @Field(() => Date)
+  @CreateDateColumn({ name: 'created_at' })
+  public createdAt: Date;
+
+  @Field(() => Date)
+  @UpdateDateColumn({ name: 'updated_at' })
+  public updatedAt: Date;
 }

@@ -29,7 +29,7 @@ export class UsersService {
   }
 
   public findOneBySlug(slug: string): Promise<User | null> {
-    return this.userRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
+    return this.userRepository.findOne({ where: { slug: slug } });
   }
 
   public findOneByEmail(email: string): Promise<User | null> {

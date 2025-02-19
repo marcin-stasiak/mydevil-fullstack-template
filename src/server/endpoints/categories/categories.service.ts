@@ -18,7 +18,7 @@ export class CategoriesService {
   }
 
   public findAll(limit: number = 30, offset: number = 0): Promise<Category[]> {
-    return this.categoryRepository.find({ take: limit, skip: offset, relations: ['meta', 'entries'] });
+    return this.categoryRepository.find({ take: limit, skip: offset, relations: ['entries'] });
   }
 
   public findOneById(id: string): Promise<Category | null> {
@@ -26,7 +26,7 @@ export class CategoriesService {
   }
 
   public findOneBySlug(slug: string): Promise<Category | null> {
-    return this.categoryRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
+    return this.categoryRepository.findOne({ where: { slug: slug } });
   }
 
   public async update(updateCategoryInput: UpdateCategoryInput): Promise<Category | null> {

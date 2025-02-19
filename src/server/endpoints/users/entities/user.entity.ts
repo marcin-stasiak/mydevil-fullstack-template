@@ -9,6 +9,14 @@ import { Entry } from '../../entries/entities/entry.entity';
 @ObjectType()
 @Entity('users')
 export class User extends BaseEndpointEntity {
+  @Field(() => String)
+  @Column({ type: 'varchar', unique: true })
+  public slug: string;
+
+  @Field(() => String)
+  @Column({ type: 'varchar', unique: true })
+  public username: string;
+
   @Field(() => String, { nullable: true })
   @Column({ type: 'varchar', select: false, unique: true })
   public email: string;

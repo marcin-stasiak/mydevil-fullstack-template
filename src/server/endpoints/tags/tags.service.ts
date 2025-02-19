@@ -29,7 +29,7 @@ export class TagsService {
   }
 
   public findOneBySlug(slug: string): Promise<Tag | null> {
-    return this.tagRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
+    return this.tagRepository.findOne({ where: { slug: slug } });
   }
 
   public async update(updateTagInput: UpdateTagInput): Promise<Tag | null> {

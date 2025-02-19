@@ -8,9 +8,17 @@ import { Entry } from '../../entries/entities/entry.entity';
 @ObjectType()
 @Entity('categories')
 export class Category extends BaseEndpointEntity {
-  @Field(() => String, { nullable: true })
-  @Column({ type: 'text', nullable: true })
-  public title?: string;
+  @Field(() => String)
+  @Column({ type: 'varchar', unique: true })
+  public slug: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  public title: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  public description: string;
 
   @Field(() => [Entry], { nullable: 'items' })
   @ManyToMany(() => Entry, (entry) => entry.categories, { nullable: true })

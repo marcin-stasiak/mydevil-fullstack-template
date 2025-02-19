@@ -9,9 +9,7 @@ import { GraphQLJSON } from 'graphql-scalars';
 import { join } from 'path';
 
 import { appConfig, databaseConfig, serverConfig } from './configs';
-import { Meta } from './entities/meta-endpoint.entity';
 import { ClientMiddleware, CompressionMiddleware, SecureMiddleware } from './middlewares';
-import { RoutesService } from './routes.service';
 
 @Global()
 @Module({
@@ -47,10 +45,7 @@ import { RoutesService } from './routes.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Meta]),
   ],
-  providers: [RoutesService],
-  exports: [RoutesService],
 })
 export class CommonModule implements NestModule {
   constructor(private readonly config: ConfigService) {}

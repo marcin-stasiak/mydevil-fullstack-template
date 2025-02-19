@@ -9,8 +9,16 @@ import { Entry } from '../../entries/entities/entry.entity';
 @Entity('tags')
 export class Tag extends BaseEndpointEntity {
   @Field(() => String)
-  @Column()
+  @Column({ type: 'varchar', unique: true })
+  public slug: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
   public title: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  public description: string;
 
   @Field(() => [Entry])
   @ManyToMany(() => Entry, (entry) => entry.tags)

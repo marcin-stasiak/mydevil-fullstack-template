@@ -35,7 +35,7 @@ export class EntriesService {
   }
 
   public findOneBySlug(slug: string): Promise<Entry | null> {
-    return this.entryRepository.findOne({ where: { meta: { slug: slug } }, relations: ['meta'] });
+    return this.entryRepository.findOne({ where: { slug: slug } });
   }
 
   public async update(updateEntryInput: UpdateEntryInput): Promise<Entry | null> {
