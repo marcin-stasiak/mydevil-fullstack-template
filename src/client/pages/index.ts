@@ -1,0 +1,9 @@
+export { AdminPage } from './admin/admin.page';
+export { CategoryPage } from './category.page';
+export { ContactPage } from './contact.page';
+export { EntryPage } from './entry.page';
+export { ErrorPage } from './error.page';
+export { HomePage } from './home.page';
+export { LoginPage } from './login.page';
+export { RegisterPage } from './register.page';
+export { TagPage } from './tag.page';
