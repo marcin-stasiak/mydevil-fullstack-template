@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
+import { NotFoundError } from '../../common/errors/not-found.error';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
@@ -23,8 +24,14 @@ export class UsersResolver {
   }
 
   @Query(() => User, { name: 'user' })
-  public findOne(@Args('slug', { type: () => String }) slug: string) {
-    return this.usersService.findOneBySlug(slug);
+  public findOne(@Args('path', { type: () => String }) path: string) {
+    const user = this.usersService.findOneByPath(path);
+
+    if (!user) {
+      throw new NotFoundError(`User with path "${path}" not found`);
+    }
+
+    return user;
   }
 
   @Mutation(() => User)

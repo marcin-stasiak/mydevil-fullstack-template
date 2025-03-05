@@ -1,5 +1,7 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
+import { NotFoundError } from 'src/server/common/errors/not-found.error';
+
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
 import { Tag } from './entities/tag.entity';
@@ -23,8 +25,14 @@ export class TagsResolver {
   }
 
   @Query(() => Tag, { name: 'tag' })
-  public findOne(@Args('slug', { type: () => String }) slug: string) {
-    return this.tagsService.findOneBySlug(slug);
+  public async findOne(@Args('path', { type: () => String }) path: string) {
+    const tag = await this.tagsService.findOneByPath(path);
+
+    if (!tag) {
+      throw new NotFoundError(`Tag with path "${path}" not found`);
+    }
+
+    return tag;
   }
 
   @Mutation(() => Tag)

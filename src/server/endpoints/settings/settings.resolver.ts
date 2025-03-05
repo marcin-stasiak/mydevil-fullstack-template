@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
+import { NotFoundError } from '../../common/errors/not-found.error';
 import { UpdateSettingInput } from './dto/update-setting.input';
 import { Setting } from './entities/setting.entity';
 import { SettingsService } from './settings.service';
@@ -14,8 +15,14 @@ export class SettingsResolver {
   }
 
   @Query(() => Setting, { name: 'setting' })
-  public findOne(@Args('name', { type: () => String }) name: string) {
-    return this.settingsService.findOneByName(name);
+  public async findOne(@Args('name', { type: () => String }) name: string) {
+    const setting = await this.settingsService.findOneByName(name);
+
+    if (!setting) {
+      throw new NotFoundError(`Setting with name "${name}" not found`);
+    }
+
+    return setting;
   }
 
   @Mutation(() => Setting)

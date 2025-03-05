@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 
+import { NotFoundError } from '../../common/errors/not-found.error';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
@@ -23,8 +24,14 @@ export class CategoriesResolver {
   }
 
   @Query(() => Category, { name: 'category' })
-  public findOne(@Args('slug', { type: () => String }) slug: string) {
-    return this.categoriesService.findOneBySlug(slug);
+  public async findOne(@Args('path', { type: () => String }) path: string) {
+    const category = await this.categoriesService.findOneByPath(path);
+
+    if (!category) {
+      throw new NotFoundError(`Category with path "${path}" not found`);
+    }
+
+    return category;
   }
 
   @Mutation(() => Category)
